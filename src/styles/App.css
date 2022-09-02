@@ -47,6 +47,24 @@ h2 {
     padding: 10px;
 }
 
+.currency-drop-down{
+    margin-right: 20px;
+    margin-top: 2px;
+}
+
+.dollar-image{
+    height: 26px;
+}
+
+.currency-drop-down button{
+    background: unset;
+    border: unset;
+}
+
+.drop-down-image{
+    height: 5px;
+}
+
 .cart-button-container button{
     background: unset;
     border: unset;

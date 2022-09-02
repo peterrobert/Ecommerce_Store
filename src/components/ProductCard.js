@@ -1,19 +1,23 @@
-import React from 'react'
+import React, { Component } from 'react'
 import product from "../images/trouser.jpeg";
 import cart from "../images/Common.png";
 
-const ProductCard = ({handleProductCart}) => {
-  return (
-   <div className='product-card-container' style={styles.productContainer}>
-    <img src={product} alt='product-one' style={styles.productImage} />
-    <h2 style={styles.productName}>Apollo running shorts</h2>
-    <h2 style={styles.productPrice}>50$</h2>
-    <div className='card-cart-button' onClick={() => handleProductCart()}> 
-        <img src={cart} alt='cart-button'/>
-    </div>
-   </div>
-  )
+export default class ProductCard extends Component {
+  render() {
+    return (
+        <div className='product-card-container' style={styles.productContainer}>
+         <img src={product} alt='product-one' style={styles.productImage} />
+         <h2 style={styles.productName}>Apollo running shorts</h2>
+         <h2 style={styles.productPrice}>50$</h2>
+         <div className='card-cart-button' onClick={() => this.props.handleProductCart()}> 
+             <img src={cart} alt='cart-button'/>
+         </div>
+        </div>
+       )
+  }
 }
+
+// ==== PRODUCT CARD REUSABLE COMPONENT STYLES ====
 
 const styles = {
     productContainer: {
@@ -40,5 +44,3 @@ const styles = {
         marginTop: "-10px"
     }
 }
-
-export default ProductCard

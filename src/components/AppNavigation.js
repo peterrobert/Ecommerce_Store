@@ -21,9 +21,9 @@ const AppNavigation = () =>  {
 
        <div className='app-cart-button' style={styles.appCartButton}>
         <div className='currency-drop-down'>
-           <img src={dollar} alt="currency"/>
+           <img src={dollar} alt="currency" className='dollar-image'/>
            <button>
-            <img src={dropdown}  alt="Currency button"/>
+            <img src={dropdown}  alt="Currency button" className='drop-down-image'/>
            </button>
         </div>
         <div className='cart-button-container'>
