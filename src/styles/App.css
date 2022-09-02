@@ -1,5 +1,58 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;400;500&display=swap');
 
-h2{
-    font-family: 'Raleway', sans-serif;
+h2 {
+  font-family: "Raleway", sans-serif;
+}
+
+/* ==== PRODUCT CARD REUSABLE COMPONENT ==== */
+.product-card-container:hover {
+  box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+}
+
+.product-card-container:active {
+  box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+  cursor: pointer;
+}
+
+.card-cart-button {
+  display: none;
+  top: -120px;
+  position: relative;
+  left: 75%;
+  cursor: pointer;
+}
+
+.product-card-container:active .card-cart-button {
+  display: block;
+}
+
+.product-card-container:hover .card-cart-button {
+  display: block;
+}
+
+/* ==== APP NAVIGATION ==== */
+
+.app-category-links li {
+  padding: 10px;
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 120%;
+  text-transform: capitalize;
+}
+
+.app-logo img{
+    height: 52px;
+    padding: 10px;
+}
+
+.cart-button-container button{
+    background: unset;
+    border: unset;
+}
+
+.cart-button-container img{
+    height: 30px;
+    cursor: pointer;
 }
