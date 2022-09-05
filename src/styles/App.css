@@ -42,35 +42,60 @@ h2 {
   text-transform: capitalize;
 }
 
-.app-logo img{
-    height: 52px;
-    padding: 10px;
+.app-logo img {
+  height: 52px;
+  padding: 10px;
 }
 
-.currency-drop-down{
-    margin-right: 20px;
-    margin-top: 2px;
+.currency-drop-down {
+  margin-right: 20px;
+  margin-top: 2px;
 }
 
-.dollar-image{
-    height: 26px;
+.dollar-image {
+  height: 26px;
 }
 
-.currency-drop-down button{
-    background: unset;
-    border: unset;
+.currency-drop-down button {
+  background: unset;
+  border: unset;
 }
 
-.drop-down-image{
-    height: 5px;
+.drop-down-image {
+  height: 5px;
 }
 
-.cart-button-container button{
-    background: unset;
-    border: unset;
+.cart-button-container button {
+  background: unset;
+  border: unset;
 }
 
-.cart-button-container img{
-    height: 30px;
-    cursor: pointer;
+.cart-button-container img {
+  height: 30px;
+  cursor: pointer;
+}
+
+/* ==== APP PRODUCT CART ==== */
+.cart-product-container .card-info h2 {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 27px;
+  color: #1D1F22;
+}
+
+.cart-product-container .card-info h1 {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+}
+
+.cart-product-container .card-info h3 {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 24px;
 }
