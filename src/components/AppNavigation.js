@@ -1,41 +1,42 @@
-import React from 'react'
+import React, { Component } from 'react'
 import logo from "../images/Group.png";
 import dollar from "../images/$.png";
 import dropdown from "../images/dropdown.png";
 import cart from "../images/cart.png";
 
-const AppNavigation = () =>  {
-  return (
-    <div className='app-navigation-container' style={styles.navigationContainer}>
-       <div className='app-category-links' style={styles.appCategoryLinks}>
-        <ul style={styles.appLinks}>
-            <li>women</li>
-            <li>men</li>
-            <li>children</li>
-        </ul>
-       </div>
-
-       <div className='app-logo' style={styles.appLogo}>
-         <img src={logo}  alt="app logo" />
-       </div>
-
-       <div className='app-cart-button' style={styles.appCartButton}>
-        <div className='currency-drop-down'>
-           <img src={dollar} alt="currency" className='dollar-image'/>
-           <button>
-            <img src={dropdown}  alt="Currency button" className='drop-down-image'/>
-           </button>
+export default class AppNavigation extends Component {
+  render() {
+    return (
+        <div className='app-navigation-container' style={styles.navigationContainer}>
+        <div className='app-category-links' style={styles.appCategoryLinks}>
+         <ul style={styles.appLinks}>
+             <li>women</li>
+             <li>men</li>
+             <li>children</li>
+         </ul>
         </div>
-        <div className='cart-button-container'>
+ 
+        <div className='app-logo' style={styles.appLogo}>
+          <img src={logo}  alt="app logo" />
+        </div>
+ 
+        <div className='app-cart-button' style={styles.appCartButton}>
+         <div className='currency-drop-down'>
+            <img src={dollar} alt="currency" className='dollar-image'/>
             <button>
-              <img src={cart} alt="cart button"/>
+             <img src={dropdown}  alt="Currency button" className='drop-down-image'/>
             </button>
+         </div>
+         <div className='cart-button-container'>
+             <button>
+               <img src={cart} alt="cart button"/>
+             </button>
+         </div>
         </div>
-       </div>
-    </div>
-  )
+     </div>
+    )
+  }
 }
-
 
 const styles = {
     navigationContainer: {
@@ -66,5 +67,3 @@ const styles = {
     }
     
 }
-
-export default AppNavigation

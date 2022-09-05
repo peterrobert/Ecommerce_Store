@@ -1,11 +1,14 @@
 import AppNavigation from './components/AppNavigation';
-import ProductCard from './components/ProductCard';
+import CategoryPage from './pages/CategoryPage';
 import './styles/App.css';
 
 function App() {
   return (
-    //  <ProductCard />
+    <>
     <AppNavigation />
+    <CategoryPage />
+    </>
+ 
   );
 }
 
