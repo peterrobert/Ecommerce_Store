@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import CartColorButton from "./CartColorButton";
 import CartSizeButton from "./CartSizeButton";
+import ImageSlider from "./ImageSlider";
 
 export default class CartProductCard extends Component {
   render() {
@@ -16,39 +17,32 @@ export default class CartProductCard extends Component {
             <h1>Running short</h1>
             <h3>$50</h3>
 
-            <div
-              className="cart-size-button-container"
-            >
+            <div className="cart-size-button-container">
               <h4>SIZE:</h4>
               <div style={styles.cartSizeButtonContainer}>
-              <CartSizeButton sizeValue= "xl" />
-              <CartSizeButton sizeValue= "s" />
-              <CartSizeButton sizeValue= "M"/>
-              <CartSizeButton  sizeValue= "l" />
+                <CartSizeButton sizeValue="xl" />
+                <CartSizeButton sizeValue="s" />
+                <CartSizeButton sizeValue="M" />
+                <CartSizeButton sizeValue="l" />
               </div>
-            
             </div>
 
-            <div
-              className="cart-size-button-container"
-            >
+            <div className="cart-size-button-container">
               <h4>COLOR:</h4>
               <div style={styles.cartColorButtonContainer}>
-               <CartColorButton color="#D3D2D5" />
-               <CartColorButton color="#2B2B2B" />
-               <CartColorButton color="#0F6450" />
+                <CartColorButton color="#D3D2D5" />
+                <CartColorButton color="#2B2B2B" />
+                <CartColorButton color="#0F6450" />
               </div>
-            
             </div>
-
-            <div className="size-buttons"></div>
-
-            <div className="color-buttons"></div>
           </div>
           <div
-            className="card-image-slider"
+            className="card-image-slider-container"
             style={styles.cardImageSlider}
-          ></div>
+          >
+            <ImageSlider />
+
+          </div>
         </div>
         <div className="border-line" style={styles.borderLine} />
       </div>
@@ -71,22 +65,24 @@ const styles = {
   },
   cardContainer: {
     display: "flex",
-    flexWrap: "wrap",
+    flexWrap: "nowrap",
   },
   cardInfo: {
     flex: 1,
   },
   cardImageSlider: {
     flex: 3,
+    display:"flex",
+    justifyContent: "flex-end"
   },
   cartSizeButtonContainer: {
     display: "flex",
     flexWrap: "nowrap",
   },
 
-  cartColorButtonContainer:{
+  cartColorButtonContainer: {
     display: "flex",
     flexWrap: "nowrap",
-    marginBottom: "20px"
-  }
+    marginBottom: "20px",
+  },
 };
