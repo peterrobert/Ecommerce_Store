@@ -1,0 +1,40 @@
+.cart-page-container .header-pg {
+    padding-left: 50px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    color: #1D1F22;
+}
+
+.cart-page-footer {
+    padding-right: 50px;
+    padding-left: 50px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.border-line {
+    background: #E5E5E5;
+    width: 100%;
+    height: 1px;
+}
+
+.tax-value {
+    font-family: 'Raleway';
+    font-weight: 400;
+    font-size: 24px;
+}
+
+.tax-value-container {
+    margin-top: 20px;
+}
+
+.tax-calculation {
+    font-family: 'Raleway';
+    font-weight: 700;
+    font-size: 24px;
+    margin-left: 10px;
+}

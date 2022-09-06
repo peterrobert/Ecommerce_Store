@@ -32,6 +32,10 @@ h2 {
 }
 
 /* ==== APP NAVIGATION ==== */
+.app-category-links {
+  display: flex;
+  align-items: center;
+}
 
 .app-category-links li {
   padding: 10px;
@@ -43,9 +47,15 @@ h2 {
   text-transform: capitalize;
 }
 
+.app-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .app-logo img {
-  height: 52px;
-  padding: 10px;
+  height: 32px;
+  padding: 22px;
 }
 
 .currency-drop-down {
@@ -60,6 +70,10 @@ h2 {
 .currency-drop-down button {
   background: unset;
   border: unset;
+}
+
+.app-cart-button {
+  align-items: center;
 }
 
 .drop-down-image {

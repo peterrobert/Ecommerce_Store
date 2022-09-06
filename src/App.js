@@ -1,16 +1,15 @@
-import AppNavigation from './components/AppNavigation';
-import CartProductCard from './components/CartProductCard';
+import AppNavigation from "./components/AppNavigation";
+import CartPage from "./pages/CartPage";
 // import CategoryPage from './pages/CategoryPage';
-import './styles/App.css';
+import "./styles/App.css";
 
 function App() {
   return (
     <>
-    <AppNavigation />
-    <CartProductCard />
-    {/* <CategoryPage /> */}
+      <AppNavigation />
+      <CartPage />
+      {/* <CategoryPage /> */}
     </>
- 
   );
 }
 

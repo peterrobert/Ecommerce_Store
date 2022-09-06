@@ -60,7 +60,6 @@ export default class CartProductCard extends Component {
             </div>
           </div>
         </div>
-        <div className="border-line" style={styles.borderLine} />
       </div>
     );
   }
@@ -111,7 +110,7 @@ const styles = {
     flexDirection: "column",
   },
   incrementButton: {
-    marginTop: "10px",
+    marginTop: "15px",
     flex: 1,
   },
   incrementValue: {
@@ -121,6 +120,6 @@ const styles = {
     alignItems: "flex-start",
   },
   decrementButton: {
-    marginBottom: "10px",
+    marginBottom: "15px",
   },
 };

@@ -12,7 +12,7 @@ export default class ImageSlider extends Component {
       <div className="app-slider">
         <SimpleImageSlider
           width={200}
-          height={288}
+          height={350}
           images={images}
           showBullets={false}
           showNavs={true}
