@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;400;500&family=Roboto+Condensed:wght@700&family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap');
+
+
+h2 {
+  font-family: "Raleway", sans-serif;
+}
+
+/* ==== PRODUCT CARD REUSABLE COMPONENT ==== */
+.product-card-container:hover {
+  box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+}
+
+.product-card-container:active {
+  box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+  cursor: pointer;
+}
+
+.card-cart-button {
+  display: none;
+  top: -120px;
+  position: relative;
+  left: 75%;
+  cursor: pointer;
+}
+
+.product-card-container:active .card-cart-button {
+  display: block;
+}
+
+.product-card-container:hover .card-cart-button {
+  display: block;
+}
+
+/* ==== APP NAVIGATION ==== */
+.app-category-links {
+  display: flex;
+  align-items: center;
+}
+
+.app-category-links li {
+  padding: 10px;
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 120%;
+  text-transform: capitalize;
+}
+
+.app-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-logo img {
+  height: 32px;
+  padding: 22px;
+}
+
+.currency-drop-down {
+  margin-right: 20px;
+  margin-top: 2px;
+}
+
+.dollar-image {
+  height: 26px;
+}
+
+.currency-drop-down button {
+  background: unset;
+  border: unset;
+}
+
+.app-cart-button {
+  align-items: center;
+}
+
+.drop-down-image {
+  height: 5px;
+}
+
+.cart-button-container button {
+  background: unset;
+  border: unset;
+}
+
+.cart-button-container img {
+  height: 30px;
+  cursor: pointer;
+}
+
+/* ==== APP PRODUCT CART ==== */
+.cart-product-container .card-info h2 {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 27px;
+  color: #1D1F22;
+}
+
+.cart-product-container .card-info h1 {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+}
+
+.cart-product-container .card-info h3 {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 24px;
+}
+
+.cart-size-button-container h4 {
+  font-family: 'Roboto Condensed';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 18px;
+}
+
+/* <==== App Slider ====> */
+
+.app-slider .rsis-container>div {
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+.app-slider div>button {
+  top: 90% !important;
+  background: black !important;
+  margin-right: -90px !important;
+}
+
+.incrementing-value {
+  font-family: "Raleway";
+  font-weight: 500;
+  font-size: 24px;
+  align-items: center;
+  margin-right: 22px;
+}

@@ -1,0 +1,16 @@
+.category-page-container h1 {
+    padding-left: 100px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 42px;
+    color: #1D1F22;
+}
+
+.category-product-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
