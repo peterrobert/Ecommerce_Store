@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import CartColorButton from "./CartColorButton";
 import CartSizeButton from "./CartSizeButton";
 
 export default class CartProductCard extends Component {
@@ -17,7 +18,6 @@ export default class CartProductCard extends Component {
 
             <div
               className="cart-size-button-container"
-              
             >
               <h4>SIZE:</h4>
               <div style={styles.cartSizeButtonContainer}>
@@ -25,6 +25,18 @@ export default class CartProductCard extends Component {
               <CartSizeButton sizeValue= "s" />
               <CartSizeButton sizeValue= "M"/>
               <CartSizeButton  sizeValue= "l" />
+              </div>
+            
+            </div>
+
+            <div
+              className="cart-size-button-container"
+            >
+              <h4>COLOR:</h4>
+              <div style={styles.cartColorButtonContainer}>
+               <CartColorButton color="#D3D2D5" />
+               <CartColorButton color="#2B2B2B" />
+               <CartColorButton color="#0F6450" />
               </div>
             
             </div>
@@ -38,6 +50,7 @@ export default class CartProductCard extends Component {
             style={styles.cardImageSlider}
           ></div>
         </div>
+        <div className="border-line" style={styles.borderLine} />
       </div>
     );
   }
@@ -70,4 +83,10 @@ const styles = {
     display: "flex",
     flexWrap: "nowrap",
   },
+
+  cartColorButtonContainer:{
+    display: "flex",
+    flexWrap: "nowrap",
+    marginBottom: "20px"
+  }
 };
