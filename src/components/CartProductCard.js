@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import CartSizeButton from "./CartSizeButton";
 
 export default class CartProductCard extends Component {
   render() {
@@ -14,6 +15,20 @@ export default class CartProductCard extends Component {
             <h1>Running short</h1>
             <h3>$50</h3>
 
+            <div
+              className="cart-size-button-container"
+              
+            >
+              <h4>SIZE:</h4>
+              <div style={styles.cartSizeButtonContainer}>
+              <CartSizeButton sizeValue= "xl" />
+              <CartSizeButton sizeValue= "s" />
+              <CartSizeButton sizeValue= "M"/>
+              <CartSizeButton  sizeValue= "l" />
+              </div>
+            
+            </div>
+
             <div className="size-buttons"></div>
 
             <div className="color-buttons"></div>
@@ -23,7 +38,6 @@ export default class CartProductCard extends Component {
             style={styles.cardImageSlider}
           ></div>
         </div>
-        CartProductCard
       </div>
     );
   }
@@ -51,5 +65,9 @@ const styles = {
   },
   cardImageSlider: {
     flex: 3,
+  },
+  cartSizeButtonContainer: {
+    display: "flex",
+    flexWrap: "nowrap",
   },
 };
