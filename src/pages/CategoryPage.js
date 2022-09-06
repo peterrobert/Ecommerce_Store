@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from "react";
-// ==== components ====
+// <==== components ====>
 import ProductCard from "../components/ProductCard";
 import product from "../images/trouser.jpeg";
-// ==== styles ====
+// <==== styles ====>
 import "../styles/CategoryPage.css";
 
 const dummyData = [
@@ -40,7 +40,10 @@ class CategoryPage extends Component {
     let results = this.state.products.map((value) => {
       return (
         <Fragment key={value.id}>
-          <ProductCard item={value} handleProductCart={this.handleProductCart} />
+          <ProductCard
+            item={value}
+            handleProductCart={this.handleProductCart}
+          />
         </Fragment>
       );
     });
@@ -52,10 +55,9 @@ class CategoryPage extends Component {
       <div className="category-page-container">
         <h1>Women</h1>
         <div className="category-product-container">
-        {this.displayProducts()}
+          {this.displayProducts()}
         </div>
-
-        </div>
+      </div>
     );
   }
 }

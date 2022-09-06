@@ -38,6 +38,7 @@ export default class AppNavigation extends Component {
   }
 }
 
+// <==== NAVIGATION REUSABLE COMPONENT STYLES ====>
 const styles = {
     navigationContainer: {
        width: "100%",
