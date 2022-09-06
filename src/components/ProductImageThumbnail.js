@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 
-import shirt from "../images/shirt.jpeg";
-
 export default class ProductImageThumbnail extends Component {
   render() {
-    const { changeImageDisplay } = this.props;
+    const { changeImageDisplay, imageThumbnail } = this.props;
     return (
       <button style={styles.btnContainer} onClick={() => changeImageDisplay()}>
-        <img src={shirt} alt="shirt-thumb" style={styles.imageContainer} />
+        <img
+          src={imageThumbnail}
+          alt="shirt-thumb"
+          style={styles.imageContainer}
+        />
       </button>
     );
   }

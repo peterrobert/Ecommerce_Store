@@ -1,16 +1,13 @@
 import AppNavigation from "./components/AppNavigation";
-import ProductImageThumbnail from "./components/ProductImageThumbnail";
-// import CartPage from "./pages/CartPage";
-// import CategoryPage from "./pages/CategoryPage";
+import ProductDisplayPage from "./pages/ProductDisplayPage";
+
 import "./styles/App.css";
 
 function App() {
   return (
     <>
       <AppNavigation />
-      <ProductImageThumbnail />
-      {/* <CartPage /> */}
-      {/* <CategoryPage /> */}
+      <ProductDisplayPage />
     </>
   );
 }
