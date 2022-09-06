@@ -40,8 +40,24 @@ export default class CartProductCard extends Component {
             className="card-image-slider-container"
             style={styles.cardImageSlider}
           >
-            <ImageSlider />
+            <div
+              className="increment-decrement-buttons"
+              style={styles.incrementDecrementButtons}
+            >
+              <div style={styles.incrementButton}>
+                <CartSizeButton sizeValue="+" />
+              </div>
+              <div style={styles.incrementValue}>
+                <h1 className="incrementing-value">1</h1>
+              </div>
+              <div style={styles.decrementButton}>
+                <CartSizeButton sizeValue="-" />
+              </div>
+            </div>
 
+            <div className="slider-container" style={styles.sliderContainer}>
+              <ImageSlider />
+            </div>
           </div>
         </div>
         <div className="border-line" style={styles.borderLine} />
@@ -72,8 +88,8 @@ const styles = {
   },
   cardImageSlider: {
     flex: 3,
-    display:"flex",
-    justifyContent: "flex-end"
+    display: "flex",
+    justifyContent: "flex-end",
   },
   cartSizeButtonContainer: {
     display: "flex",
@@ -84,5 +100,27 @@ const styles = {
     display: "flex",
     flexWrap: "nowrap",
     marginBottom: "20px",
+  },
+  sliderContainer: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+  },
+  incrementDecrementButtons: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  incrementButton: {
+    marginTop: "10px",
+    flex: 1,
+  },
+  incrementValue: {
+    flex: 1,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "flex-start",
+  },
+  decrementButton: {
+    marginBottom: "10px",
   },
 };

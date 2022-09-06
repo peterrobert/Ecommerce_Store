@@ -16,6 +16,9 @@ export default class ImageSlider extends Component {
           images={images}
           showBullets={false}
           showNavs={true}
+          navStyle={2}
+          navMargin={110}
+          navSize={20}
         />
       </div>
     );

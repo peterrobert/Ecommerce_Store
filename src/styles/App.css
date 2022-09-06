@@ -101,7 +101,7 @@ h2 {
   line-height: 24px;
 }
 
-.cart-size-button-container h4{
+.cart-size-button-container h4 {
   font-family: 'Roboto Condensed';
   font-style: normal;
   font-weight: 700;
@@ -111,7 +111,21 @@ h2 {
 
 /* <==== App Slider ====> */
 
-.app-slider .rsis-container > div{
+.app-slider .rsis-container>div {
   background-position: center !important;
   background-repeat: no-repeat !important;
+}
+
+.app-slider div>button {
+  top: 90% !important;
+  background: black !important;
+  margin-right: -90px !important;
+}
+
+.incrementing-value {
+  font-family: "Raleway";
+  font-weight: 500;
+  font-size: 24px;
+  align-items: center;
+  margin-right: 22px;
 }
