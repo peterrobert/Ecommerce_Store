@@ -40,7 +40,10 @@ export default class ProductDisplayPage extends Component {
     return (
       <div className="product-display-container">
         <div className="thumbnails-display">{this.displayThumbnails()}</div>
-        <div className="main-image-display"></div>
+        <div className="main-image-display">
+          <img src={product} alt="main" />
+        </div>
+        <div className="main-content-display"></div>
       </div>
     );
   }
