@@ -29,11 +29,7 @@
 
 .main-image-display img {
     width: 100%;
-<<<<<<< HEAD
-    height: 550px;
-=======
     height: 530px;
->>>>>>> b16089e405ca6551642f2d255c96f8c7fcddd468
     object-fit: cover;
 }
 
