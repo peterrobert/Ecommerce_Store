@@ -29,12 +29,16 @@ class CategoryPage extends Component {
       products: dummyData,
     });
   }
-  // <==== Handle add to cart button on each product card ====>
 
+  // <==== Fetch product and categories ====> 
+  fetchProductCategories = () => {
+
+  }
+
+  // <==== Handle add to cart button on each product card ====>
   handleProductCart = () => {
     console.log("clicked");
   };
-
   // <==== Display all the product cards ====>
   displayProducts = () => {
     let results = this.state.products.map((value) => {
