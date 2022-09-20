@@ -4,6 +4,7 @@
     padding-left: 50px;
     margin-right: auto;
     margin-left: auto;
+    margin-top: 20px;
 }
 
 .thumbnails-display {
@@ -15,6 +16,8 @@
 
 .main-content-display {
     flex: 2;
+    display: flex;
+    justify-content: center;
 }
 
 .main-image-display {
@@ -26,6 +29,37 @@
 
 .main-image-display img {
     width: 100%;
+<<<<<<< HEAD
     height: 550px;
+=======
+    height: 530px;
+>>>>>>> b16089e405ca6551642f2d255c96f8c7fcddd468
     object-fit: cover;
+}
+
+.main-content-display h2 {
+    font-family: 'Raleway';
+    font-weight: 600;
+    font-size: 30px;
+    color: #1D1F22;
+}
+
+.main-content-display h1 {
+    font-family: "Raleway";
+    font-weight: 400;
+    font-size: 30px;
+    color: #1D1F22;
+    margin-top: -20px;
+}
+
+.product-display-price {
+    font-family: 'Raleway';
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.product-description {
+    font-family: 'roboto';
+    font-weight: 400;
+    font-size: 16px;
 }
