@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 import _ from "lodash";
 // <==== components ====>
 import ProductCard from "../components/ProductCard";
@@ -34,8 +35,14 @@ class CategoryPage extends Component {
   };
 
   // <==== Handle add to cart button on each product card ====>
-  handleProductCart = () => {
-    console.log("clicked");
+  handleProductCart = (product) => {
+    const {addToCart, appGlobalCart} = this.context;
+    // <=== If the cart is empty ====> 
+    if(_.isEmpty(appGlobalCart)) return  addToCart(product);
+    // <==== If the cart doesnt include the item ====> 
+    if(!_.isEmpty(appGlobalCart) && !_.includes(appGlobalCart, product)) return addToCart(product)
+    // <=== However it means the cart already has that product so show notice.
+    NotificationManager.warning('This product is already in the cart', 'Notice!', 3000);
   };
 
   displayProducts = () => {
@@ -61,12 +68,16 @@ class CategoryPage extends Component {
 
   render() {
     return (
-      <div className="category-page-container">
+      <>
+       <NotificationContainer/>
+       <div className="category-page-container">
         <h1>{this.context.tabSelection.tab}</h1>
         <div className="category-product-container">
           {this.displayProducts()}
         </div>
       </div>
+      </>
+      
     );
   }
 }

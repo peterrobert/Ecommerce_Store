@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import CartContext from "../context/cartContext";
 import CurrencyContext from "../context/currencyContext";
 import cart from "../images/Common.png";
 
 export default class ProductCard extends Component {
-
+  
   displayPrice = () => {
     const {prices} = this.props.item;
     const {appGlobalCurrency} = this.context
@@ -38,7 +39,7 @@ export default class ProductCard extends Component {
         <img src={gallery[0]} alt="product-one" style={styles.productImage} />
         <h2 style={styles.productName}>{name}</h2>
         <h2 style={styles.productPrice}>{appGlobalCurrency.symbol} {this.displayPrice()} </h2>
-        <div className="card-cart-button" onClick={() => handleProductCart()}>
+        <div className="card-cart-button" onClick={() => handleProductCart(this.props.item)}>
           <img src={cart} alt="cart-button" />
         </div>
       </div>
@@ -48,6 +49,7 @@ export default class ProductCard extends Component {
 
 // <==== SET THE CONTEXT TYPES ====>
 ProductCard.contextType = CurrencyContext
+
 
 // <==== PRODUCT CARD REUSABLE COMPONENT STYLES ====>
 

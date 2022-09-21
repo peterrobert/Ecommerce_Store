@@ -6,6 +6,7 @@ import cart from "../images/cart.png";
 import getAllCategories from "../services/categoriesService";
 import TabContext from "../context/tabContext";
 import AppCurrencies from "./AppCurrencies";
+import AppNavCart from "./AppNavCart";
 
 export default class AppNavigation extends Component {
   constructor(props) {
@@ -16,6 +17,7 @@ export default class AppNavigation extends Component {
       appCurrencies: [],
       tabSelection: "",
       currencyTab: false,
+      cartTab: false,
     };
   }
 
@@ -57,8 +59,7 @@ export default class AppNavigation extends Component {
   };
 
   render() {
-    const {appGlobalCurrency} = this.context
-
+    const { appGlobalCurrency, appGlobalCart } = this.context;
     const activeTabStyles = {
       color: "#5ECE7B",
       fontFamily: "Raleway",
@@ -67,7 +68,7 @@ export default class AppNavigation extends Component {
       fontSize: "22px",
       borderBottom: "2px solid",
     };
-   
+
     return (
       <div
         className="app-navigation-container"
@@ -125,12 +126,21 @@ export default class AppNavigation extends Component {
               />
             ) : null}
           </div>
-          <div className="cart-button-container">
+          <div
+            className="cart-button-container"
+            onClick={() =>
+              this.setState({ ...this.state, cartTab: !this.state.cartTab })
+            }
+          >
+            <div className="cart-count"> {appGlobalCart.length} </div>
             <button>
               <img src={cart} alt="cart button" />
             </button>
+            {this.state.cartTab === true ? <AppNavCart products={appGlobalCart} /> : null}
           </div>
+         
         </div>
+      
       </div>
     );
   }
