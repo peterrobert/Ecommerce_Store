@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;400;500&family=Roboto+Condensed:wght@700&family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap');
 @import 'react-notifications/lib/notifications.css';
 
+body{
+  overflow-x: hidden;
+}
+
 h2 {
   font-family: "Raleway", sans-serif;
 }
@@ -110,6 +114,54 @@ h2 {
   top: 11px;
   font-family: 'Raleway';
   font-size: 16px;
+}
+
+.nav-cart-container .cart-product-container .border-line {
+   height: unset !important;
+}
+
+.nav-cart-container .cart-product-container{
+  margin-bottom: 20px;
+}
+
+.nav-cart-container .cart-product-container h2{
+  font-style: normal !important;
+  font-weight: 300 !important;
+  font-size: 20px !important
+}
+
+.nav-cart-container .cart-product-container h1{
+  font-style: normal !important;
+  font-weight: 300 !important;
+  font-size: 20px !important
+}
+
+.nav-cart-container .cart-product-container h3{
+  font-style: normal !important;
+  font-weight: 500 !important;
+  font-size: 20px !important
+}
+
+.nav-cart-container .cart-product-container .cart-size-button-container h4{
+  font-style: normal !important;
+  font-weight: 400 !important;
+  font-size: 16px !important
+}
+
+.nav-cart-container .cart-product-container .cart-size-button-container button{
+  width: 30px !important;
+    height: 30px !important;
+}
+
+.nav-cart-container .increment-decrement-buttons button{
+  width: 30px !important;
+  height: 30px !important;
+}
+
+.nav-cart-container .incrementing-value{
+  font-family: 'Raleway' !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
 }
 
 /* ==== APP PRODUCT CART ==== */

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import CartContext from "../context/cartContext";
 import CurrencyContext from "../context/currencyContext";
 import cart from "../images/Common.png";
 

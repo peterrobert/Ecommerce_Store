@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import CategoryPage from "./pages/CategoryPage";
 import CartPage from "./pages/CartPage";
@@ -56,10 +56,10 @@ export default class App extends Component {
               }}
             >
               <AppNavigation />
-              <Routes>
-                <Route path="/" element={<CategoryPage />} />
-                <Route path="/cart" element={<CartPage />} />
-              </Routes>
+              <Switch>
+                <Route path="/" component={CategoryPage} exact />
+                <Route path="/cart" component={CartPage} />
+              </Switch>
             </TabContext.Provider>
           </CurrencyContext.Provider>
         </CartContext.Provider>

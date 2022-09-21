@@ -43,8 +43,9 @@ const styles = {
     fontWeight: 500,
     color: "#1D1F22",
     width: "114px",
-    boxShadow: " 0px 4px 35px rgb(168 172 176 / 19",
-    zIndex: 1
+    boxShadow: "0px 4px 35px rgb(168 172 176 / 19)",
+    zIndex: 1,
+   
   },
   listContainer: {
     listStyleType: "none",
