@@ -1,7 +1,9 @@
 import React, { Component, Fragment } from "react";
 // <==== components ====>
 import ProductCard from "../components/ProductCard";
+import TabContext from "../context/tabContext";
 import product from "../images/trouser.jpeg";
+import getAllProducts from "../services/productService";
 // <==== styles ====>
 import "../styles/CategoryPage.css";
 
@@ -25,14 +27,25 @@ class CategoryPage extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      products: dummyData,
-    });
+    // this.setState({
+    //   products: dummyData,
+    // });
+    this.fetchAllProducts()
   }
 
-  // <==== Fetch product and categories ====> 
-  fetchProductCategories = () => {
+  // <==== Fetch product ====> 
+  fetchAllProducts = async () => {
+    try {
+      const response = await getAllProducts(this.context.tabSelection.tab);
+      console.log(response)
 
+      // this.setState({
+      //   appCategories: categories,
+      // });
+
+    } catch (error) {
+      console.log("something went wrong", error);
+    }
   }
 
   // <==== Handle add to cart button on each product card ====>
@@ -65,5 +78,8 @@ class CategoryPage extends Component {
     );
   }
 }
+
+// <==== SET THE CONTEXT TYPES ====>
+CategoryPage.contextType = TabContext;
 
 export default CategoryPage;

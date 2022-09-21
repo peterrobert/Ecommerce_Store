@@ -5,37 +5,57 @@ import dollar from "../images/$.png";
 import dropdown from "../images/dropdown.png";
 import cart from "../images/cart.png";
 import getAllCategories from "../services/categoriesService";
-
+import TabContext from "../context/tabContext";
 
 export default class AppNavigation extends Component {
-
-  constructor(props){
+  constructor(props) {
     super(props);
 
     this.state = {
-      appCategories: []
-    }
-  
+      appCategories: [],
+      tabSelection: "",
+    };
   }
 
   componentDidMount() {
-    this.displayCategories()
+    this.displayCategories();
+    this.setState({
+      ...this.state,
+      tabSelection: this.context.tabSelection.tab,
+    });
   }
 
-  // <==== DISPLAY THE CATEGORIES ====> 
+  // <==== DISPLAY THE CATEGORIES ====>
   displayCategories = async () => {
     try {
-      const {categories } = await getAllCategories()
+      const { categories } = await getAllCategories();
       this.setState({
-        appCategories: categories
-      })
+        appCategories: categories,
+      });
     } catch (error) {
-      console.log("something went wrong")
+      console.log("something went wrong");
     }
-  
-  }
+  };
+
+  // <==== HANDLE CLICK ====>
+  handleClick = (value) => {
+    this.setState({
+      ...this.state,
+      tabSelection: value.name,
+    })
+    this.context.handleTabSelection(value.name)
+  };
 
   render() {
+    const activeTabStyles = {
+      color: "#5ECE7B",
+      fontFamily: "Raleway",
+      fontStyle: "normal",
+      fontWeight: 600,
+      fontSize: "22px",
+      borderBottom: "2px solid",
+    };
+
     return (
       <div
         className="app-navigation-container"
@@ -43,17 +63,23 @@ export default class AppNavigation extends Component {
       >
         <div className="app-category-links" style={styles.appCategoryLinks}>
           <ul style={styles.appLinks}>
-            {
-             this.state.appCategories&& this.state.appCategories.map((value, idx) => {
-              return(
-                <Fragment key={idx}>
-                  <li>
-                    {value.name}
-                  </li>
-                </Fragment>
-              )   
-              })
-            }
+            {this.state.appCategories &&
+              this.state.appCategories.map((value, idx) => {
+                return (
+                  <Fragment key={idx}>
+                    <li
+                      onClick={() => this.handleClick(value)}
+                      style={
+                        this.state.tabSelection === value.name
+                          ? activeTabStyles
+                          : null
+                      }
+                    >
+                      {value.name}
+                    </li>
+                  </Fragment>
+                );
+              })}
           </ul>
         </div>
 
@@ -82,6 +108,10 @@ export default class AppNavigation extends Component {
     );
   }
 }
+
+// <==== SET THE CONTEXT TYPES ====>
+
+AppNavigation.contextType = TabContext;
 
 // <==== NAVIGATION REUSABLE COMPONENT STYLES ====>
 const styles = {
