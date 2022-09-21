@@ -7,6 +7,10 @@ const GET_CATEGORIES = gql`
   query {
     categories {
       name
+    },
+    currencies{
+      label,
+      symbol
     }
   }
 `;

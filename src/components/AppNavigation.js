@@ -13,6 +13,7 @@ export default class AppNavigation extends Component {
 
     this.state = {
       appCategories: [],
+      appCurrencies: [],
       tabSelection: "",
     };
   }
@@ -28,9 +29,10 @@ export default class AppNavigation extends Component {
   // <==== DISPLAY THE CATEGORIES ====>
   displayCategories = async () => {
     try {
-      const { categories } = await getAllCategories();
+      const { categories, currencies } = await getAllCategories();
       this.setState({
         appCategories: categories,
+        appCurrencies: currencies
       });
     } catch (error) {
       console.log("something went wrong");
@@ -47,6 +49,7 @@ export default class AppNavigation extends Component {
   };
 
   render() {
+    console.log(this.state.appCurrencies)
     const activeTabStyles = {
       color: "#5ECE7B",
       fontFamily: "Raleway",
