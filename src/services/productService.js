@@ -1,7 +1,6 @@
 import { gql } from "graphql-request";
 import Client from "./client";
 
-
 // <=== Query ====>
 let GET_PRODUCTS = gql`
  query {
@@ -14,7 +13,7 @@ let GET_PRODUCTS = gql`
       gallery,
       prices{
         currency{
-         symbol 
+         label
         },
         amount
       }

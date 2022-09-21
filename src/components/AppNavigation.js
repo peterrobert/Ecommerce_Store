@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from "react";
 
 import logo from "../images/Group.png";
-import dollar from "../images/$.png";
 import dropdown from "../images/dropdown.png";
 import cart from "../images/cart.png";
 import getAllCategories from "../services/categoriesService";
 import TabContext from "../context/tabContext";
+import AppCurrencies from "./AppCurrencies";
 
 export default class AppNavigation extends Component {
   constructor(props) {
@@ -15,6 +15,7 @@ export default class AppNavigation extends Component {
       appCategories: [],
       appCurrencies: [],
       tabSelection: "",
+      currencyTab: false,
     };
   }
 
@@ -26,14 +27,21 @@ export default class AppNavigation extends Component {
     });
   }
 
+  // <==== Change Grobal Currency According To User Selection ====>
+  changeCurrency = (currencySelection) => {
+    this.context.handleCurrencySelection(currencySelection);
+  };
+
   // <==== DISPLAY THE CATEGORIES ====>
   displayCategories = async () => {
     try {
       const { categories, currencies } = await getAllCategories();
       this.setState({
         appCategories: categories,
-        appCurrencies: currencies
+        appCurrencies: currencies,
       });
+      // <==== Set default global app currency ====>
+      this.context.handleCurrencySelection(currencies[0]);
     } catch (error) {
       console.log("something went wrong");
     }
@@ -44,12 +52,13 @@ export default class AppNavigation extends Component {
     this.setState({
       ...this.state,
       tabSelection: value.name,
-    })
-    this.context.handleTabSelection(value.name)
+    });
+    this.context.handleTabSelection(value.name);
   };
 
   render() {
-    console.log(this.state.appCurrencies)
+    const {appGlobalCurrency} = this.context
+
     const activeTabStyles = {
       color: "#5ECE7B",
       fontFamily: "Raleway",
@@ -58,7 +67,7 @@ export default class AppNavigation extends Component {
       fontSize: "22px",
       borderBottom: "2px solid",
     };
-
+   
     return (
       <div
         className="app-navigation-container"
@@ -91,8 +100,16 @@ export default class AppNavigation extends Component {
         </div>
 
         <div className="app-cart-button" style={styles.appCartButton}>
-          <div className="currency-drop-down">
-            <img src={dollar} alt="currency" className="dollar-image" />
+          <div
+            className="currency-drop-down"
+            onClick={() =>
+              this.setState({
+                ...this.state,
+                currencyTab: !this.state.currencyTab,
+              })
+            }
+          >
+            <span className="dollar-image">{appGlobalCurrency.symbol}</span>
             <button>
               <img
                 src={dropdown}
@@ -100,6 +117,13 @@ export default class AppNavigation extends Component {
                 className="drop-down-image"
               />
             </button>
+
+            {this.state.currencyTab === true ? (
+              <AppCurrencies
+                currency={this.state.appCurrencies}
+                changeCurrency={this.changeCurrency}
+              />
+            ) : null}
           </div>
           <div className="cart-button-container">
             <button>
@@ -113,7 +137,6 @@ export default class AppNavigation extends Component {
 }
 
 // <==== SET THE CONTEXT TYPES ====>
-
 AppNavigation.contextType = TabContext;
 
 // <==== NAVIGATION REUSABLE COMPONENT STYLES ====>
