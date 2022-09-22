@@ -128,12 +128,11 @@ export default class AppNavigation extends Component {
           </div>
           <div
             className="cart-button-container"
-            onClick={() =>
-              this.setState({ ...this.state, cartTab: !this.state.cartTab })
-            }
           >
             <div className="cart-count"> {appGlobalCart.length} </div>
-            <button>
+            <button onClick={() =>
+              this.setState({ ...this.state, cartTab: !this.state.cartTab })
+            }>
               <img src={cart} alt="cart button" />
             </button>
             {this.state.cartTab === true ? <AppNavCart products={appGlobalCart} /> : null}

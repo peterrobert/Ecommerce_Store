@@ -57,7 +57,7 @@ export default class App extends Component {
             >
               <AppNavigation />
               <Switch>
-                <Route path="/" component={CategoryPage} exact />
+                <Route path="/" component={CategoryPage} exact/>
                 <Route path="/cart" component={CartPage} />
               </Switch>
             </TabContext.Provider>

@@ -11,6 +11,16 @@ let GET_PRODUCTS = gql`
       name,
       inStock,
       gallery,
+      description,
+      brand,
+      attributes{
+        name,
+        type,
+        id,
+        items{
+          displayValue
+        }
+      }
       prices{
         currency{
          label
