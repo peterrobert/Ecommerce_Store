@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 
 import CategoryPage from "./pages/CategoryPage";
+import ProductDisplayPage from "./pages/CategoryPage";
 import CartPage from "./pages/CartPage";
 import "./styles/App.css";
 import AppNavigation from "./components/AppNavigation";
@@ -28,21 +29,23 @@ export default class App extends Component {
     this.setState({ ...this.state, currency: selection });
   };
 
-  // <==== FOR ADDING PRODUCTS INTO THE CART ====> 
+  // <==== FOR ADDING PRODUCTS INTO THE CART ====>
 
   handleAddToCart = (selection) => {
-    this.setState({...this.state, cart: [...this.state.cart, selection]})
-  }
+    this.setState({ ...this.state, cart: [...this.state.cart, selection] });
+  };
 
   render() {
     return (
       <>
-        <CartContext.Provider value={{ cart: this.state.cart, addToCart: this.handleAddToCart }}>
+        <CartContext.Provider
+          value={{ cart: this.state.cart, addToCart: this.handleAddToCart }}
+        >
           <CurrencyContext.Provider
             value={{
               appGlobalCurrency: this.state.currency,
               handleCurrencySelection: this.handleCurrencySelection,
-              addToCart: this.handleAddToCart 
+              addToCart: this.handleAddToCart,
             }}
           >
             <TabContext.Provider
@@ -52,13 +55,14 @@ export default class App extends Component {
                 appGlobalCurrency: this.state.currency,
                 handleCurrencySelection: this.handleCurrencySelection,
                 addToCart: this.handleAddToCart,
-                appGlobalCart: this.state.cart
+                appGlobalCart: this.state.cart,
               }}
             >
               <AppNavigation />
               <Switch>
-                <Route path="/" component={CategoryPage} exact/>
+                <Route path="/products/:id" component={ProductDisplayPage} />
                 <Route path="/cart" component={CartPage} />
+                <Route path="/" component={CategoryPage} />
               </Switch>
             </TabContext.Provider>
           </CurrencyContext.Provider>
