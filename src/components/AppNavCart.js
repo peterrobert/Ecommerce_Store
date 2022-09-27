@@ -17,14 +17,14 @@ class AppNavCart extends Component {
 
   totalPriceCalculation = (initialProductPrice, calculatedPrice) => {
     if (calculatedPrice === null) {
-     console.log(initialProductPrice)
+      console.log(initialProductPrice);
 
       this.setState({
         ...this.state,
-        prices:  [initialProductPrice],
+        prices: [initialProductPrice],
       });
 
-      console.log(this.state)
+      console.log(this.state);
 
       const sum = this.state.prices.reduce((accumulator, value) => {
         return accumulator + value;
@@ -84,7 +84,6 @@ class AppNavCart extends Component {
 }
 
 export default withRouter(AppNavCart);
-
 
 const styles = {
   container: {
