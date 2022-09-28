@@ -73,11 +73,11 @@ export default class ProductDisplayPage extends Component {
               <h4>PRICE:</h4>
               <h3 className="product-display-price">$50.00</h3>
               <AppButton appText="Add to cart" color="#5ECE7B" />
-              <p className="product-description">
+              {/* <p className="product-description">
                 Find stunning women's cocktail dresses and party dresses. Stand
                 out in lace and metallic cocktail dresses and party dresses from
                 all your favorite brands.
-              </p>
+              </p> */}
             </div>
           </div>
         </div>
