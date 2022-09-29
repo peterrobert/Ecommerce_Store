@@ -4,7 +4,6 @@ import CartColorButton from "./CartColorButton";
 import CartSizeButton from "./CartSizeButton";
 import ImageSlider from "./ImageSlider";
 
-
 export default class CartProductCard extends Component {
   constructor(props) {
     super(props);
@@ -29,9 +28,6 @@ export default class CartProductCard extends Component {
     });
 
     this.setState({ ...this.state, initialProductPrice: results[0].amount });
-
-    const { calulateTotal } = this.props;
-    calulateTotal(results[0].amount, this.state.calculatedPrice);
   };
 
   handleIncreament = () => {

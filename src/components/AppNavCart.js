@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 import CartProductCard from "./CartProductCard";
 import AppButton from "./AppButton";
@@ -9,30 +9,10 @@ import CartContext from "../context/cartContext";
 class AppNavCart extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      prices: [],
-      totalPrice: null,
+      totalPrice: [],
     };
   }
-
-  totalPriceCalculation = (initialProductPrice, calculatedPrice) => {
-    if (calculatedPrice === null) {
-
-      this.setState({
-        ...this.state,
-        prices: [initialProductPrice],
-      });
-      
-      const sum = this.state.prices.reduce((accumulator, value) => {
-        return accumulator + value;
-      }, 0);
-
-      this.setState({ ...this.state, totalPrice: sum });
-
-      return;
-    }
-  };
 
   displayItems = () => {
     const { cart } = this.context;
@@ -40,10 +20,7 @@ class AppNavCart extends Component {
       let results = cart.map((product) => {
         return (
           <Fragment key={product.id}>
-            <CartProductCard
-              product={product}
-              calulateTotal={this.totalPriceCalculation}
-            />
+            <CartProductCard product={product} totalPrice={this.totalPrice} />
           </Fragment>
         );
       });
@@ -51,12 +28,15 @@ class AppNavCart extends Component {
     }
   };
 
+  totalPrice = (price) => {};
+
   redirectToCart = () => {
-    this.props.navigate('/cart');
+    this.props.navigate("/cart");
   };
 
   render() {
     const { products } = this.props;
+
     return (
       <div style={styles.container} className="nav-cart-container">
         <div style={styles.numberOfItems}>
@@ -82,7 +62,7 @@ class AppNavCart extends Component {
 
 function AppNavCartNavigate(props) {
   let navigate = useNavigate();
-  return <AppNavCart {...props} navigate={navigate} />
+  return <AppNavCart {...props} navigate={navigate} />;
 }
 
 export default AppNavCartNavigate;
