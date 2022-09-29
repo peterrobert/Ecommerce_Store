@@ -1,14 +1,13 @@
 import { gql, request } from "graphql-request";
 
-import { GraphQLClient} from 'graphql-request'
-// <===== END POINT =====> 
+import { GraphQLClient } from "graphql-request";
+// <===== END POINT =====>
 const endpoint = "http://localhost:4000/";
 
-// <=== NEW CLIENT INSTANCE ====> 
+// <=== NEW CLIENT INSTANCE ====>
 const Client = new GraphQLClient(endpoint, {
-    method: 'GET',
-})
-
+  method: "GET",
+});
 
 // <=== Query All Products ====>
 let GET_PRODUCTS = gql`
@@ -46,45 +45,45 @@ const getAllProducts = async () => {
   return response;
 };
 
-
 // <==== FETCH SINGLE PRODUCT ====>
 export const getSingleProduct = async (ID) => {
   // <==== QUERY ====>
   const query = gql`
-  query getProduct($id: String!){
-    product(id: $id) {
-      name
-      id
-      inStock
-      gallery
-      description
-      category
-      attributes {
+    query getProduct($id: String!) {
+      product(id: $id) {
         name
-        type
-        items {
-          displayValue
-          value
-          id
+        id
+        inStock
+        gallery
+        description
+        category
+        attributes {
+          name
+          type
+          items {
+            displayValue
+            value
+            id
+          }
         }
-      }
-      prices {
-        currency {
-          label
-          symbol
+        prices {
+          currency {
+            label
+            symbol
+          }
+          amount
         }
+        brand
       }
-      brand
     }
-  }
-`;
+  `;
 
-const variables = {
-  id: ID
-}
+  const variables = {
+    id: ID,
+  };
 
-  const response = await request( endpoint ,query, variables);
-   return response.product
+  const response = await request(endpoint, query, variables);
+  return response.product;
 };
 
 export default getAllProducts;
