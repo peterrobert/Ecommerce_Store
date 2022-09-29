@@ -150,7 +150,7 @@ h2 {
 
 .nav-cart-container .cart-product-container .cart-size-button-container button {
   width: auto !important;
-  height: 30px !important;
+  height: auto !important;
 }
 
 .nav-cart-container .increment-decrement-buttons button {
@@ -160,6 +160,7 @@ h2 {
 
 .nav-cart-container .cart-product-container .cart-size-button-container .color-btn-component{
   width: 30px !important;
+  height: 30px !important;
 }
 
 .nav-cart-container .incrementing-value {
@@ -213,6 +214,7 @@ h2 {
 .app-slider .rsis-container>div {
   background-position: center !important;
   background-repeat: no-repeat !important;
+  background-size: contain !important;
 }
 
 .app-slider div>button {

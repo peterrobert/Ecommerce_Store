@@ -1,9 +1,10 @@
 import React, { Component, Fragment } from "react";
-import { withRouter } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 import CartProductCard from "./CartProductCard";
 import AppButton from "./AppButton";
 import _ from "lodash";
+import CartContext from "../context/cartContext";
 
 class AppNavCart extends Component {
   constructor(props) {
@@ -17,15 +18,12 @@ class AppNavCart extends Component {
 
   totalPriceCalculation = (initialProductPrice, calculatedPrice) => {
     if (calculatedPrice === null) {
-      console.log(initialProductPrice);
 
       this.setState({
         ...this.state,
         prices: [initialProductPrice],
       });
-
-      console.log(this.state);
-
+      
       const sum = this.state.prices.reduce((accumulator, value) => {
         return accumulator + value;
       }, 0);
@@ -37,9 +35,9 @@ class AppNavCart extends Component {
   };
 
   displayItems = () => {
-    const { products } = this.props;
-    if (!_.isEmpty(products)) {
-      let results = products.map((product) => {
+    const { cart } = this.context;
+    if (!_.isEmpty(cart)) {
+      let results = cart.map((product) => {
         return (
           <Fragment key={product.id}>
             <CartProductCard
@@ -54,8 +52,7 @@ class AppNavCart extends Component {
   };
 
   redirectToCart = () => {
-    const { history } = this.props;
-    if (history) history.push("/cart");
+    this.props.navigate('/cart');
   };
 
   render() {
@@ -83,7 +80,14 @@ class AppNavCart extends Component {
   }
 }
 
-export default withRouter(AppNavCart);
+function AppNavCartNavigate(props) {
+  let navigate = useNavigate();
+  return <AppNavCart {...props} navigate={navigate} />
+}
+
+export default AppNavCartNavigate;
+
+AppNavCart.contextType = CartContext;
 
 const styles = {
   container: {

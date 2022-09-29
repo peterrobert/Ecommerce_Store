@@ -135,7 +135,7 @@ export default class AppNavigation extends Component {
             }>
               <img src={cart} alt="cart button" />
             </button>
-            {this.state.cartTab === true ? <AppNavCart products={appGlobalCart} /> : null}
+            {this.state.cartTab === true ? <AppNavCart products={appGlobalCart} cartTab = {this.state.cartTab}/> : null}
           </div>
          
         </div>
