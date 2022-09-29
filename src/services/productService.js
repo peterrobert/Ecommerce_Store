@@ -1,5 +1,14 @@
-import { gql } from "graphql-request";
-import Client from "./client";
+import { gql, request } from "graphql-request";
+
+import { GraphQLClient} from 'graphql-request'
+// <===== END POINT =====> 
+const endpoint = "http://localhost:4000/";
+
+// <=== NEW CLIENT INSTANCE ====> 
+const Client = new GraphQLClient(endpoint, {
+    method: 'GET',
+})
+
 
 // <=== Query All Products ====>
 let GET_PRODUCTS = gql`
@@ -31,12 +40,19 @@ let GET_PRODUCTS = gql`
     }
   }
 `;
+// <==== Fetch All Products ====>
+const getAllProducts = async () => {
+  const response = await Client.request(GET_PRODUCTS);
+  return response;
+};
 
-// <=== Query Single Product ====>
 
-const GET_SINGLE_PRODUCT = gql`
-  query getProduct($id: String!) {
-    product(id: $title) {
+// <==== FETCH SINGLE PRODUCT ====>
+export const getSingleProduct = async (ID) => {
+  // <==== QUERY ====>
+  const query = gql`
+  query getProduct($id: String!){
+    product(id: $id) {
       name
       id
       inStock
@@ -63,16 +79,12 @@ const GET_SINGLE_PRODUCT = gql`
   }
 `;
 
-// <==== Fetch All Products ====>
-const getAllProducts = async () => {
-  const response = await Client.request(GET_PRODUCTS);
-  return response;
-};
+const variables = {
+  id: ID
+}
 
-// <==== FETCH SINGLE PRODUCT ====>
-export const getSingleProduct = async (ID) => {
-  const response = await Client.request(GET_SINGLE_PRODUCT, ID);
-  return response;
+  const response = await request( endpoint ,query, variables);
+   return response.product
 };
 
 export default getAllProducts;

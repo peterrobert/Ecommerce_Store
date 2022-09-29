@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import CategoryPage from "./pages/CategoryPage";
-import ProductDisplayPage from "./pages/CategoryPage";
+import ProductDisplayPage from "./pages/ProductDisplayPage";
 import CartPage from "./pages/CartPage";
 import "./styles/App.css";
 import AppNavigation from "./components/AppNavigation";
@@ -67,7 +67,7 @@ export default class App extends Component {
               <AppNavigation />
               <Routes>
                 <Route path="/" element={<CategoryPage />} />
-                <Route path="/:id" element={<ProductDisplayPage />} />
+                <Route path="/products/:id" element={<ProductDisplayPage />} />
                 <Route path="/cart" element={<CartPage />} />
               </Routes>
             </TabContext.Provider>

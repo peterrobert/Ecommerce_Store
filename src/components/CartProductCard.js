@@ -4,6 +4,7 @@ import CartColorButton from "./CartColorButton";
 import CartSizeButton from "./CartSizeButton";
 import ImageSlider from "./ImageSlider";
 
+
 export default class CartProductCard extends Component {
   constructor(props) {
     super(props);

@@ -1,50 +1,71 @@
-import React, { Component, Fragment } from "react";
+import React, { Component, Fragment} from "react";
 import CartColorButton from "../components/CartColorButton";
 import CartSizeButton from "../components/CartSizeButton";
-import ProductImageThumbnail from "../components/ProductImageThumbnail";
 import AppButton from "../components/AppButton";
-
-import product from "../images/trouser.jpeg";
+import ProductImageThumbnail from "../components/ProductImageThumbnail"
+import { useParams } from "react-router-dom";
 import "../styles/ProductDisplayPage.css";
+import { getSingleProduct } from "../services/productService";
+import _ from "lodash";
 
-const dummyData = [
-  { image: product, id: 1 },
-  { image: product, id: 2 },
-  { image: product, id: 3 },
-];
-
-export default class ProductDisplayPage extends Component {
+class ProductDisplayPage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      products: [],
+      product: {},
+      mainImage: ""
     };
   }
 
   componentDidMount() {
-    this.setState({
-      products: dummyData,
-    });
+    this.getProduct();
   }
 
+
+  getProduct = async () => {
+    const { id } = this.props.params;
+    try {
+      const response = await getSingleProduct(id);
+    
+      console.log(response)
+
+      this.setState({
+        product: response,
+      });
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   displayThumbnails = () => {
-    let results = this.state.products.map((value) => {
-      return (
-        <Fragment key={value.id}>
-          <ProductImageThumbnail imageThumbnail={value.image} />
-        </Fragment>
-      );
-    });
-    return results;
+    const {product} = this.state
+    if(!_.isEmpty(product)){
+      this.setState({
+        ...this.state,
+        mainImage: product.gallery[0]
+      })
+      let results = product.gallery.map((value, idx) => {
+        
+        return (
+          <Fragment key={idx}>
+            <ProductImageThumbnail imageThumbnail = {value}/>
+          </Fragment>
+        );
+      });
+      return results;
+    }
+  
   };
 
   render() {
+    const { mainImage} = this.state
     return (
       <div className="product-display-container">
         <div className="thumbnails-display">{this.displayThumbnails()}</div>
         <div className="main-image-display">
-          <img src={product} alt="main" />
+          <img src={mainImage} alt="main" />
         </div>
         <div className="main-content-display">
           <div className="card-info">
@@ -85,3 +106,10 @@ export default class ProductDisplayPage extends Component {
     );
   }
 }
+
+function AppProductDisplayNavigate(props) {
+  let params = useParams();
+  return <ProductDisplayPage {...props} params={params} />;
+}
+
+export default AppProductDisplayNavigate;
