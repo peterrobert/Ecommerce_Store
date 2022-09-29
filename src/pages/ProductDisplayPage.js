@@ -1,5 +1,8 @@
 import React, { Component, Fragment } from "react";
-import { NotificationManager } from "react-notifications";
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
 import CartColorButton from "../components/CartColorButton";
 import CartSizeButton from "../components/CartSizeButton";
 import AppButton from "../components/AppButton";
@@ -53,6 +56,13 @@ class ProductDisplayPage extends Component {
     }
   };
 
+  changeImageThumbnail = (image) => {
+    this.setState({
+      ...this.state,
+      mainImage: image,
+    });
+  };
+
   displayAttributes = () => {
     const { product } = this.state;
     // <==== Colors, sizes, etc ====>
@@ -74,9 +84,9 @@ class ProductDisplayPage extends Component {
     };
 
     // <==== Attributes Main Container ====>
-    let results = product.attributes.map((value) => {
+    let results = product.attributes.map((value, idx) => {
       return (
-        <div className="cart-size-button-container" key={value.id}>
+        <div className="cart-size-button-container" key={idx}>
           <h4>{value.name}:</h4>
           <div style={styles.cartSizeButtonContainer}>
             {mutateDisplayValue(value.name, value.items)}
@@ -94,7 +104,10 @@ class ProductDisplayPage extends Component {
       let results = product.gallery.map((value, idx) => {
         return (
           <Fragment key={idx}>
-            <ProductImageThumbnail imageThumbnail={value} />
+            <ProductImageThumbnail
+              imageThumbnail={value}
+              changeImageDisplay={this.changeImageThumbnail}
+            />
           </Fragment>
         );
       });
@@ -104,14 +117,13 @@ class ProductDisplayPage extends Component {
 
   // <==== Handle add to cart button on each product card ====>
   handleProductCart = (product) => {
-    const { addToCart, appGlobalCart } = this.context;
+    const { addToCart, cart } = this.context;
     // <=== If the cart is empty ====>
-    if (_.isEmpty(appGlobalCart)) return addToCart(product);
+    if (_.isEmpty(cart)) return addToCart(product);
     // <==== If the cart doesnt include the item ====>
-    if (!_.isEmpty(appGlobalCart) && !_.includes(appGlobalCart, product))
+    if (!_.isEmpty(cart) && !_.includes(cart, product))
       return addToCart(product);
     // <=== However it means the cart already has that product so show notice.
-    console.log(appGlobalCart, product);
     NotificationManager.warning(
       "This product is already in the cart",
       "Notice!",
@@ -124,39 +136,41 @@ class ProductDisplayPage extends Component {
     const { appGlobalCurrency } = this.context;
 
     if (!_.isEmpty(product)) {
-      console.log(product);
       return (
-        <div className="product-display-container">
-          <div className="thumbnails-display">{this.displayThumbnails()}</div>
-          <div className="main-image-display">
-            <img src={mainImage} alt="main" />
-          </div>
-          <div className="main-content-display">
-            <div className="card-info">
-              <h2>{product.name}</h2>
-              <h1>{product.category}</h1>
-              {this.displayAttributes()}
-              <div className="cart-size-button-container">
-                <h4>PRICE:</h4>
-                <h3 className="product-display-price">
-                  {appGlobalCurrency.symbol}
-                  {this.displayPrice()}
-                </h3>
-                <AppButton
-                  appText="Add to cart"
-                  color="#5ECE7B"
-                  handleClick={() => this.handleProductCart(product)}
-                />
-                <p
-                  className="product-description"
-                  style={styles.productDescription}
-                >
-                  {parse(product.description)}
-                </p>
+        <>
+          <NotificationContainer />
+          <div className="product-display-container">
+            <div className="thumbnails-display">{this.displayThumbnails()}</div>
+            <div className="main-image-display">
+              <img src={mainImage} alt="main" />
+            </div>
+            <div className="main-content-display">
+              <div className="card-info">
+                <h2>{product.name}</h2>
+                <h1>{product.category}</h1>
+                {this.displayAttributes()}
+                <div className="cart-size-button-container">
+                  <h4>PRICE:</h4>
+                  <h3 className="product-display-price">
+                    {appGlobalCurrency.symbol}
+                    {this.displayPrice()}
+                  </h3>
+                  <AppButton
+                    appText="Add to cart"
+                    color="#5ECE7B"
+                    handleClick={() => this.handleProductCart(product)}
+                  />
+                  <div
+                    className="product-description"
+                    style={styles.productDescription}
+                  >
+                    {parse(product.description)}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </>
       );
     }
   }

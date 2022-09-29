@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import { useNavigate } from "react-router-dom";
 
 import logo from "../images/Group.png";
 import dropdown from "../images/dropdown.png";
@@ -8,7 +9,7 @@ import TabContext from "../context/tabContext";
 import AppCurrencies from "./AppCurrencies";
 import AppNavCart from "./AppNavCart";
 
-export default class AppNavigation extends Component {
+class AppNavigation extends Component {
   constructor(props) {
     super(props);
 
@@ -58,6 +59,10 @@ export default class AppNavigation extends Component {
     this.context.handleTabSelection(value.name);
   };
 
+  redirectToHome = () => {
+    this.props.navigate("/");
+  };
+
   render() {
     const { appGlobalCurrency, appGlobalCart } = this.context;
     const activeTabStyles = {
@@ -96,7 +101,11 @@ export default class AppNavigation extends Component {
           </ul>
         </div>
 
-        <div className="app-logo" style={styles.appLogo}>
+        <div
+          className="app-logo"
+          style={styles.appLogo}
+          onClick={() => this.redirectToHome()}
+        >
           <img src={logo} alt="app logo" />
         </div>
 
@@ -126,24 +135,34 @@ export default class AppNavigation extends Component {
               />
             ) : null}
           </div>
-          <div
-            className="cart-button-container"
-          >
+          <div className="cart-button-container">
             <div className="cart-count"> {appGlobalCart.length} </div>
-            <button onClick={() =>
-              this.setState({ ...this.state, cartTab: !this.state.cartTab })
-            }>
+            <button
+              onClick={() =>
+                this.setState({ ...this.state, cartTab: !this.state.cartTab })
+              }
+            >
               <img src={cart} alt="cart button" />
             </button>
-            {this.state.cartTab === true ? <AppNavCart products={appGlobalCart} cartTab = {this.state.cartTab}/> : null}
+            {this.state.cartTab === true ? (
+              <AppNavCart
+                products={appGlobalCart}
+                cartTab={this.state.cartTab}
+              />
+            ) : null}
           </div>
-         
         </div>
-      
       </div>
     );
   }
 }
+
+function AppDisplayNavigation(props) {
+  let navigate = useNavigate();
+  return <AppNavigation {...props} navigate={navigate} />;
+}
+
+export default AppDisplayNavigation;
 
 // <==== SET THE CONTEXT TYPES ====>
 AppNavigation.contextType = TabContext;
@@ -168,6 +187,7 @@ const styles = {
     flex: 1,
     display: "flex",
     justifyContent: "center",
+    cursor: "pointer",
   },
   appCartButton: {
     display: "flex",

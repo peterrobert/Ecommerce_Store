@@ -14,8 +14,8 @@ export default class CartSizeButton extends Component {
 
 const styles = {
   buttonContainer: {
-    width: "63px",
-    height: "45px",
+    width: "auto",
+    height: "auto",
     background: "#FFFFFF",
     border: "1px solid #1D1F22",
     fontFamily: "Source Sans Pro",
@@ -23,6 +23,6 @@ const styles = {
     fontWeight: "400",
     fontSize: "22px",
     marginRight: "15px",
-    cursor: "pointer"
+    cursor: "pointer",
   },
 };
