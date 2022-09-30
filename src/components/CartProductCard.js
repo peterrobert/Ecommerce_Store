@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import CurrencyContext from "../context/currencyContext";
+
 import CartColorButton from "./CartColorButton";
 import CartSizeButton from "./CartSizeButton";
 import ImageSlider from "./ImageSlider";

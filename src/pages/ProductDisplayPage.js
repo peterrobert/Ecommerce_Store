@@ -3,16 +3,18 @@ import {
   NotificationContainer,
   NotificationManager,
 } from "react-notifications";
+import { useParams } from "react-router-dom";
+
 import CartColorButton from "../components/CartColorButton";
 import CartSizeButton from "../components/CartSizeButton";
 import AppButton from "../components/AppButton";
 import ProductImageThumbnail from "../components/ProductImageThumbnail";
-import { useParams } from "react-router-dom";
 import "../styles/ProductDisplayPage.css";
+import CurrencyContext from "../context/currencyContext";
+
 import { getSingleProduct } from "../services/productService";
 import _ from "lodash";
 import parse from "html-react-parser";
-import CurrencyContext from "../context/currencyContext";
 
 class ProductDisplayPage extends Component {
   constructor(props) {

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import CurrencyContext from "../context/currencyContext";
+import { useNavigate } from "react-router-dom";
+
 import cart from "../images/Common.png";
-import { useNavigate } from 'react-router-dom';
 
 class ProductCard extends Component {
   displayPrice = () => {
@@ -18,7 +19,6 @@ class ProductCard extends Component {
     this.props.navigate(`/products/${productID}`);
   };
 
-
   render() {
     // <=== item in the props ====>
     const { name, gallery, inStock, id } = this.props.item;
@@ -30,7 +30,6 @@ class ProductCard extends Component {
       <div
         className="product-card-container"
         style={inStock ? styles.productContainer : styles.outOfStock}
-        
       >
         {inStock ? null : (
           <div
@@ -41,7 +40,12 @@ class ProductCard extends Component {
           </div>
         )}
 
-        <img src={gallery[0]} alt="product-one" style={styles.productImage} onClick={() => this.redirectToProductDisplay(id)}/>
+        <img
+          src={gallery[0]}
+          alt="product-one"
+          style={styles.productImage}
+          onClick={() => this.redirectToProductDisplay(id)}
+        />
         <h2 style={styles.productName}>{name}</h2>
         <h2 style={styles.productPrice}>
           {appGlobalCurrency.symbol} {this.displayPrice()}{" "}
@@ -59,10 +63,9 @@ class ProductCard extends Component {
   }
 }
 
-
 function AppProductNavigate(props) {
   let navigate = useNavigate();
-  return <ProductCard {...props} navigate={navigate} />
+  return <ProductCard {...props} navigate={navigate} />;
 }
 
 export default AppProductNavigate;
