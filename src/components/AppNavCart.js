@@ -10,7 +10,7 @@ class AppNavCart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      totalPrice: [],
+      InitialTotalPrice: [],
     };
   }
 
@@ -27,8 +27,6 @@ class AppNavCart extends Component {
       return results;
     }
   };
-
-  totalPrice = (price) => {};
 
   redirectToCart = () => {
     this.props.navigate("/cart");
