@@ -45,7 +45,6 @@ class AppNavCart extends Component {
 
         <div>
           <div style={styles.footerContainer}>
-            <div style={styles.totalTitle}>Total</div>
             <div style={styles.totalNumber}>{this.state.totalPrice}</div>
           </div>
           <div style={styles.footerContainer}>
