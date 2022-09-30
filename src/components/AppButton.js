@@ -7,7 +7,7 @@ export default class AppButton extends Component {
     const styles = {
       buttonContainer: {
         backgroundColor: color ? color : "transparent",
-        width: "280px",
+        width: "100%",
         height: "48px",
         justifyContent: "center",
         alignItems: "center",

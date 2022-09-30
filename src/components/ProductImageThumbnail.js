@@ -4,7 +4,10 @@ export default class ProductImageThumbnail extends Component {
   render() {
     const { changeImageDisplay, imageThumbnail } = this.props;
     return (
-      <button style={styles.btnContainer} onClick={() => changeImageDisplay()}>
+      <button
+        style={styles.btnContainer}
+        onClick={() => changeImageDisplay(imageThumbnail)}
+      >
         <img
           src={imageThumbnail}
           alt="shirt-thumb"

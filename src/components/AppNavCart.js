@@ -1,51 +1,26 @@
 import React, { Component, Fragment } from "react";
-import { withRouter } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import CartProductCard from "./CartProductCard";
 import AppButton from "./AppButton";
 import _ from "lodash";
+import CartContext from "../context/cartContext";
 
 class AppNavCart extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      prices: [],
-      totalPrice: null,
+      InitialTotalPrice: [],
     };
   }
 
-  totalPriceCalculation = (initialProductPrice, calculatedPrice) => {
-    if (calculatedPrice === null) {
-      console.log(initialProductPrice);
-
-      this.setState({
-        ...this.state,
-        prices: [initialProductPrice],
-      });
-
-      console.log(this.state);
-
-      const sum = this.state.prices.reduce((accumulator, value) => {
-        return accumulator + value;
-      }, 0);
-
-      this.setState({ ...this.state, totalPrice: sum });
-
-      return;
-    }
-  };
-
   displayItems = () => {
-    const { products } = this.props;
-    if (!_.isEmpty(products)) {
-      let results = products.map((product) => {
+    const { cart } = this.context;
+    if (!_.isEmpty(cart)) {
+      let results = cart.map((product) => {
         return (
           <Fragment key={product.id}>
-            <CartProductCard
-              product={product}
-              calulateTotal={this.totalPriceCalculation}
-            />
+            <CartProductCard product={product} totalPrice={this.totalPrice} />
           </Fragment>
         );
       });
@@ -54,12 +29,12 @@ class AppNavCart extends Component {
   };
 
   redirectToCart = () => {
-    const { history } = this.props;
-    if (history) history.push("/cart");
+    this.props.navigate("/cart");
   };
 
   render() {
     const { products } = this.props;
+
     return (
       <div style={styles.container} className="nav-cart-container">
         <div style={styles.numberOfItems}>
@@ -70,7 +45,6 @@ class AppNavCart extends Component {
 
         <div>
           <div style={styles.footerContainer}>
-            <div style={styles.totalTitle}>Total</div>
             <div style={styles.totalNumber}>{this.state.totalPrice}</div>
           </div>
           <div style={styles.footerContainer}>
@@ -83,7 +57,14 @@ class AppNavCart extends Component {
   }
 }
 
-export default withRouter(AppNavCart);
+function AppNavCartNavigate(props) {
+  let navigate = useNavigate();
+  return <AppNavCart {...props} navigate={navigate} />;
+}
+
+export default AppNavCartNavigate;
+
+AppNavCart.contextType = CartContext;
 
 const styles = {
   container: {
