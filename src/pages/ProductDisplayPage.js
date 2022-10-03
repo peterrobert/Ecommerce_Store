@@ -157,11 +157,15 @@ class ProductDisplayPage extends Component {
                     {appGlobalCurrency.symbol}
                     {this.displayPrice()}
                   </h3>
-                  <AppButton
-                    appText="Add to cart"
-                    color="#5ECE7B"
-                    handleClick={() => this.handleProductCart(product)}
-                  />
+                  {product.inStock ? (
+                    <AppButton
+                      appText="Add to cart"
+                      color="#5ECE7B"
+                      handleClick={() => this.handleProductCart(product)}
+                    />
+                  ) : (
+                    <AppButton appText="Out of Stock" />
+                  )}
                   <div
                     className="product-description"
                     style={styles.productDescription}
