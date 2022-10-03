@@ -9,7 +9,6 @@ import AppNavigation from "./components/AppNavigation";
 import TabContext from "./context/tabContext";
 import CurrencyContext from "./context/currencyContext";
 import CartContext from "./context/cartContext";
-import _ from "lodash";
 
 export default class App extends Component {
   constructor(props) {
@@ -35,7 +34,6 @@ export default class App extends Component {
   handleAddToCart = (selection) => {
     this.setState({ ...this.state, cart: [...this.state.cart, selection] });
   };
-
 
   render() {
     return (

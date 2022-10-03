@@ -7,7 +7,6 @@ import CartContext from "../context/cartContext";
 import "../styles/CartPage.css";
 import _ from "lodash";
 
-
 export default class CartPage extends Component {
   constructor(props) {
     super(props);
@@ -20,14 +19,10 @@ export default class CartPage extends Component {
 
   totalPriceCalculation = (initialProductPrice, calculatedPrice) => {
     if (calculatedPrice === null) {
-      console.log(initialProductPrice);
-
       this.setState({
         ...this.state,
         prices: [initialProductPrice],
       });
-
-      console.log(this.state);
 
       const sum = this.state.prices.reduce((accumulator, value) => {
         return accumulator + value;
@@ -38,7 +33,6 @@ export default class CartPage extends Component {
       return;
     }
   };
-
 
   // <==== Display all the product cards ====>
   displayItems = () => {
