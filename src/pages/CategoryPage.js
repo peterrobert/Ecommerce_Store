@@ -1,65 +1,88 @@
 import React, { Component, Fragment } from "react";
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import _ from "lodash";
 // <==== components ====>
 import ProductCard from "../components/ProductCard";
-import product from "../images/trouser.jpeg";
+import TabContext from "../context/tabContext";
+import getAllProducts from "../services/productService";
 // <==== styles ====>
 import "../styles/CategoryPage.css";
-
-const dummyData = [
-  { id: 1, name: "Apollo running shorts", price: "50$", image: product },
-  { id: 2, name: "Apollo running shorts", price: "50$", image: product },
-  { id: 3, name: "Apollo running shorts", price: "50$", image: product },
-  { id: 4, name: "Apollo running shorts", price: "50$", image: product },
-  { id: 5, name: "Apollo running shorts", price: "50$", image: product },
-  { id: 6, name: "Apollo running shorts", price: "50$", image: product },
-  { id: 7, name: "Apollo running shorts", price: "50$", image: product },
-];
 
 class CategoryPage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      products: [],
+      categories: [],
     };
   }
 
   componentDidMount() {
-    this.setState({
-      products: dummyData,
-    });
+    this.fetchAllProducts();
   }
-  // <==== Handle add to cart button on each product card ====>
 
-  handleProductCart = () => {
-    console.log("clicked");
+  // <==== Fetch product ====>
+  fetchAllProducts = async () => {
+    try {
+      const { categories} = await getAllProducts();
+      this.setState({
+        ...this.state,
+        categories: categories,
+      });
+    } catch (error) {
+      console.log("something went wrong", error);
+    }
   };
 
-  // <==== Display all the product cards ====>
+  // <==== Handle add to cart button on each product card ====>
+  handleProductCart = (product) => {
+    const {addToCart, appGlobalCart} = this.context;
+    // <=== If the cart is empty ====> 
+    if(_.isEmpty(appGlobalCart)) return  addToCart(product);
+    // <==== If the cart doesnt include the item ====> 
+    if(!_.isEmpty(appGlobalCart) && !_.includes(appGlobalCart, product)) return addToCart(product)
+    // <=== However it means the cart already has that product so show notice.
+    NotificationManager.warning('This product is already in the cart', 'Notice!', 3000);
+  };
+
   displayProducts = () => {
-    let results = this.state.products.map((value) => {
-      return (
-        <Fragment key={value.id}>
-          <ProductCard
-            item={value}
-            handleProductCart={this.handleProductCart}
-          />
-        </Fragment>
-      );
-    });
-    return results;
+    const filterProducts = (value) => {
+      if (value.name === this.context.tabSelection.tab) return value;
+    };
+    const results = this.state.categories.filter(filterProducts);
+
+    if (!_.isEmpty(results)) {
+      let items = results[0].products.map((value) => {
+        return (
+          <Fragment key={value.id}>
+            <ProductCard
+              item={value}
+              handleProductCart={this.handleProductCart}
+            />
+          </Fragment>
+        );
+      });
+      return items;
+    }
   };
 
   render() {
     return (
-      <div className="category-page-container">
-        <h1>Women</h1>
+      <>
+       <NotificationContainer/>
+       <div className="category-page-container">
+        <h1>{this.context.tabSelection.tab}</h1>
         <div className="category-product-container">
           {this.displayProducts()}
         </div>
       </div>
+      </>
+      
     );
   }
 }
+
+// <==== SET THE CONTEXT TYPES ====>
+CategoryPage.contextType = TabContext;
 
 export default CategoryPage;

@@ -2,48 +2,61 @@ import React, { Component, Fragment } from "react";
 import AppButton from "../components/AppButton";
 // <==== Components ====>
 import CartProductCard from "../components/CartProductCard";
-import product from "../images/trouser.jpeg";
+import CartContext from "../context/cartContext";
 // <==== Styles ====>
 import "../styles/CartPage.css";
-
-const dummyData = [
-  { id: 1, name: "Apollo running shorts", price: "50$", image: product },
-  { id: 2, name: "Apollo running shorts", price: "50$", image: product },
-  { id: 3, name: "Apollo running shorts", price: "50$", image: product },
-];
+import _ from "lodash";
 
 export default class CartPage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      products: [],
+      prices: [],
+      totalPrice: null,
     };
   }
 
-  componentDidMount() {
-    this.setState({
-      products: dummyData,
-    });
-  }
+  totalPriceCalculation = (initialProductPrice, calculatedPrice) => {
+    if (calculatedPrice === null) {
+      this.setState({
+        ...this.state,
+        prices: [initialProductPrice],
+      });
+
+      const sum = this.state.prices.reduce((accumulator, value) => {
+        return accumulator + value;
+      }, 0);
+
+      this.setState({ ...this.state, totalPrice: sum });
+
+      return;
+    }
+  };
 
   // <==== Display all the product cards ====>
-  displayProducts = () => {
-    let results = this.state.products.map((value) => {
-      return (
-        <Fragment key={value.id}>
-          <CartProductCard />
-        </Fragment>
-      );
-    });
-    return results;
+  displayItems = () => {
+    const { cart } = this.context;
+    if (!_.isEmpty(cart)) {
+      let results = cart.map((product) => {
+        return (
+          <Fragment key={product.id}>
+            <CartProductCard
+              product={product}
+              calulateTotal={this.totalPriceCalculation}
+            />
+          </Fragment>
+        );
+      });
+      return results;
+    }
   };
 
   render() {
     return (
       <div className="cart-page-container">
         <h1 className="header-pg">Cart</h1>
-        <div className="cart-product-container">{this.displayProducts()}</div>
+        <div className="cart-product-container">{this.displayItems()}</div>
         <footer className="cart-page-footer">
           <div className="border-line" />
           <div className="tax-value-container">
@@ -64,3 +77,5 @@ export default class CartPage extends Component {
     );
   }
 }
+
+CartPage.contextType = CartContext;

@@ -20,7 +20,7 @@ export default class CartColorButton extends Component {
     }
 
     return (
-        <button style={styles.buttonContainer} onClick={() => selectColor()} />
+        <button className="color-btn-component" style={styles.buttonContainer} onClick={() => selectColor()} />
     )
   }
 }

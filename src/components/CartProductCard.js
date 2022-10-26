@@ -1,10 +1,97 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
+import CurrencyContext from "../context/currencyContext";
+
 import CartColorButton from "./CartColorButton";
 import CartSizeButton from "./CartSizeButton";
 import ImageSlider from "./ImageSlider";
 
 export default class CartProductCard extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      quantity: 1,
+      initialProductPrice: null,
+      calculatedPrice: null,
+    };
+  }
+
+  componentDidMount() {
+    this.displayPrice();
+  }
+
+  displayPrice = () => {
+    const { product } = this.props;
+    const { appGlobalCurrency } = this.context;
+
+    let results = product.prices.filter((value) => {
+      if (value.currency.label === appGlobalCurrency.label) return value.amount;
+    });
+
+    this.setState({ ...this.state, initialProductPrice: results[0].amount });
+  };
+
+  handleIncreament = () => {
+    let initialPrice = this.state.initialProductPrice;
+    let multiplyProduct = initialPrice * (this.state.quantity + 1);
+
+    this.setState({
+      ...this.state,
+      quantity: this.state.quantity + 1,
+      calculatedPrice: multiplyProduct,
+    });
+  };
+
+  handleDecrement = () => {
+    let initialPrice = this.state.initialProductPrice;
+    let multiplyProduct = initialPrice * Math.max(0, this.state.quantity - 1);
+
+    this.setState({
+      ...this.state,
+      quantity: Math.max(0, this.state.quantity - 1),
+      calculatedPrice: multiplyProduct,
+    });
+  };
+
+  displayAttributes = () => {
+    const { product } = this.props;
+    // <==== Colors, sizes, etc ====>
+    const mutateDisplayValue = (name, itemsArray) => {
+      let results = itemsArray.map((value, idx) => {
+        if (name === "Color")
+          return (
+            <Fragment key={idx}>
+              <CartColorButton color={value.displayValue} />
+            </Fragment>
+          );
+        return (
+          <Fragment key={idx}>
+            <CartSizeButton sizeValue={value.displayValue} />
+          </Fragment>
+        );
+      });
+      return results;
+    };
+
+    // <==== Attributes Main Container ====>
+    let results = product.attributes.map((value) => {
+      return (
+        <div className="cart-size-button-container" key={value.id}>
+          <h4>{value.name}:</h4>
+          <div style={styles.cartSizeButtonContainer}>
+            {mutateDisplayValue(value.name, value.items)}
+          </div>
+        </div>
+      );
+    });
+
+    return results;
+  };
+
   render() {
+    const { product } = this.props;
+    const { appGlobalCurrency } = this.context;
+
     return (
       <div
         className="cart-product-container"
@@ -13,28 +100,16 @@ export default class CartProductCard extends Component {
         <div className="border-line" style={styles.borderLine} />
         <div className="card-container" style={styles.cardContainer}>
           <div className="card-info" style={styles.cardInfo}>
-            <h2>Apollo</h2>
-            <h1>Running short</h1>
-            <h3>$50</h3>
+            <h2>{product.name}</h2>
+            <h1>{product.brand}</h1>
+            <h3>
+              {appGlobalCurrency.symbol}{" "}
+              {this.state.calculatedPrice === null
+                ? this.state.initialProductPrice
+                : this.state.calculatedPrice}
+            </h3>
 
-            <div className="cart-size-button-container">
-              <h4>SIZE:</h4>
-              <div style={styles.cartSizeButtonContainer}>
-                <CartSizeButton sizeValue="xl" />
-                <CartSizeButton sizeValue="s" />
-                <CartSizeButton sizeValue="M" />
-                <CartSizeButton sizeValue="l" />
-              </div>
-            </div>
-
-            <div className="cart-size-button-container">
-              <h4>COLOR:</h4>
-              <div style={styles.cartColorButtonContainer}>
-                <CartColorButton color="#D3D2D5" />
-                <CartColorButton color="#2B2B2B" />
-                <CartColorButton color="#0F6450" />
-              </div>
-            </div>
+            {this.displayAttributes()}
           </div>
           <div
             className="card-image-slider-container"
@@ -45,18 +120,21 @@ export default class CartProductCard extends Component {
               style={styles.incrementDecrementButtons}
             >
               <div style={styles.incrementButton}>
-                <CartSizeButton sizeValue="+" />
+                <CartSizeButton
+                  sizeValue="+"
+                  saveSize={this.handleIncreament}
+                />
               </div>
               <div style={styles.incrementValue}>
-                <h1 className="incrementing-value">1</h1>
+                <h1 className="incrementing-value">{this.state.quantity}</h1>
               </div>
               <div style={styles.decrementButton}>
-                <CartSizeButton sizeValue="-" />
+                <CartSizeButton sizeValue="-" saveSize={this.handleDecrement} />
               </div>
             </div>
 
             <div className="slider-container" style={styles.sliderContainer}>
-              <ImageSlider />
+              <ImageSlider gallery={product.gallery} />
             </div>
           </div>
         </div>
@@ -64,6 +142,8 @@ export default class CartProductCard extends Component {
     );
   }
 }
+// <==== SET THE CONTEXT TYPES ====>
+CartProductCard.contextType = CurrencyContext;
 
 // <==== CART PRODUCT CARD REUSABLE COMPONENT STYLES ====>
 const styles = {
