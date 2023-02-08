@@ -1,4 +1,4 @@
-# React Ecommerce Application
+# React Ecommerce Application utilising graphql API
 
 > The aim of this project is to create an ecommerce application that utilises an api created in GRAPHQL. At the moment the user can see the products add the product to a cart, show the product display page and increase the amount of items in the cart. Since this is a small application i didnt use redux but just utilised the power of react context. I plan on intergrating stripe as a payment system.
 
